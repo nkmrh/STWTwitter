@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface STWTimelineController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
+@interface STWTimelineController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate>
 
 @end

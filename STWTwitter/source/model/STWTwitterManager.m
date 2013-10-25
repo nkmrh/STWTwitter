@@ -160,7 +160,9 @@ static STWTwitterManager*  _sharedInstance = nil;
                 //
                 // For to get user timeline statuses
                 //
-                urlString = [NSString stringWithFormat:@"https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=%@&include_rts=true", screenName];
+//                urlString = [NSString stringWithFormat:@"https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=%@&include_rts=true", screenName];
+                urlString = [NSString stringWithFormat:@"https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=%@&include_rts=true&count=200", screenName];
+
                 url = [NSURL URLWithString:urlString];
                 request = [SLRequest requestForServiceType:SLServiceTypeTwitter requestMethod:SLRequestMethodGET URL:url parameters:nil];
                 [request setAccount:account];

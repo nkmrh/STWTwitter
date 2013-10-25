@@ -14,10 +14,10 @@
 		6327A66A1813F9C300FF66E7 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 6327A6661813F9C300FF66E7 /* spark.png */; };
 		6327A66B1813F9C300FF66E7 /* star_wars_theme.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6327A6671813F9C300FF66E7 /* star_wars_theme.mp3 */; };
 		6327A66C1813F9C300FF66E7 /* stormTrooper@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6327A6681813F9C300FF66E7 /* stormTrooper@2x.png */; };
+		634033D1181A5F2F002B2F17 /* AMBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 634033D0181A5F2F002B2F17 /* AMBlurView.m */; };
 		63B8C2BA1814051200D2F96F /* STWScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B8C2B91814051200D2F96F /* STWScroller.m */; };
 		63B8C2BD18144B9F00D2F96F /* STWDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B8C2BC18144B9F00D2F96F /* STWDetailController.m */; };
 		63CB607B1813F92F00C7523D /* STWAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CB60761813F92F00C7523D /* STWAppController.m */; };
-		63CB607C1813F92F00C7523D /* STWConfigController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CB60781813F92F00C7523D /* STWConfigController.m */; };
 		63CB607D1813F92F00C7523D /* STWTimelineController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CB607A1813F92F00C7523D /* STWTimelineController.m */; };
 		63CB60801813F95900C7523D /* STWTwitterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CB607F1813F95900C7523D /* STWTwitterManager.m */; };
 		63E9C06018115C7D000A0D4E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63E9C05F18115C7D000A0D4E /* Foundation.framework */; };
@@ -52,14 +52,14 @@
 		6327A6661813F9C300FF66E7 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spark.png; path = resources/spark.png; sourceTree = "<group>"; };
 		6327A6671813F9C300FF66E7 /* star_wars_theme.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = star_wars_theme.mp3; path = resources/star_wars_theme.mp3; sourceTree = "<group>"; };
 		6327A6681813F9C300FF66E7 /* stormTrooper@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "stormTrooper@2x.png"; path = "resources/stormTrooper@2x.png"; sourceTree = "<group>"; };
+		634033CF181A5F2F002B2F17 /* AMBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBlurView.h; sourceTree = "<group>"; };
+		634033D0181A5F2F002B2F17 /* AMBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBlurView.m; sourceTree = "<group>"; };
 		63B8C2B81814051200D2F96F /* STWScroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STWScroller.h; path = source/view/STWScroller.h; sourceTree = "<group>"; };
 		63B8C2B91814051200D2F96F /* STWScroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STWScroller.m; path = source/view/STWScroller.m; sourceTree = "<group>"; };
 		63B8C2BB18144B9F00D2F96F /* STWDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STWDetailController.h; path = source/controller/STWDetailController.h; sourceTree = "<group>"; };
 		63B8C2BC18144B9F00D2F96F /* STWDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STWDetailController.m; path = source/controller/STWDetailController.m; sourceTree = "<group>"; };
 		63CB60751813F92F00C7523D /* STWAppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STWAppController.h; path = source/controller/STWAppController.h; sourceTree = "<group>"; };
 		63CB60761813F92F00C7523D /* STWAppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STWAppController.m; path = source/controller/STWAppController.m; sourceTree = "<group>"; };
-		63CB60771813F92F00C7523D /* STWConfigController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STWConfigController.h; path = source/controller/STWConfigController.h; sourceTree = "<group>"; };
-		63CB60781813F92F00C7523D /* STWConfigController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STWConfigController.m; path = source/controller/STWConfigController.m; sourceTree = "<group>"; };
 		63CB60791813F92F00C7523D /* STWTimelineController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STWTimelineController.h; path = source/controller/STWTimelineController.h; sourceTree = "<group>"; };
 		63CB607A1813F92F00C7523D /* STWTimelineController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STWTimelineController.m; path = source/controller/STWTimelineController.m; sourceTree = "<group>"; };
 		63CB607E1813F95900C7523D /* STWTwitterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STWTwitterManager.h; path = source/model/STWTwitterManager.h; sourceTree = "<group>"; };
@@ -116,6 +116,8 @@
 			children = (
 				63B8C2B81814051200D2F96F /* STWScroller.h */,
 				63B8C2B91814051200D2F96F /* STWScroller.m */,
+				634033CF181A5F2F002B2F17 /* AMBlurView.h */,
+				634033D0181A5F2F002B2F17 /* AMBlurView.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -125,8 +127,6 @@
 			children = (
 				63CB60751813F92F00C7523D /* STWAppController.h */,
 				63CB60761813F92F00C7523D /* STWAppController.m */,
-				63CB60771813F92F00C7523D /* STWConfigController.h */,
-				63CB60781813F92F00C7523D /* STWConfigController.m */,
 				63B8C2BB18144B9F00D2F96F /* STWDetailController.h */,
 				63B8C2BC18144B9F00D2F96F /* STWDetailController.m */,
 				63CB60791813F92F00C7523D /* STWTimelineController.h */,
@@ -343,7 +343,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63CB607C1813F92F00C7523D /* STWConfigController.m in Sources */,
+				634033D1181A5F2F002B2F17 /* AMBlurView.m in Sources */,
 				63CB60801813F95900C7523D /* STWTwitterManager.m in Sources */,
 				63CB607B1813F92F00C7523D /* STWAppController.m in Sources */,
 				63B8C2BD18144B9F00D2F96F /* STWDetailController.m in Sources */,

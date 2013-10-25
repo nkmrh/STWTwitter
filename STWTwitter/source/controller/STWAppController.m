@@ -48,7 +48,7 @@
 }
 
 @end
-
+#if 0
 @implementation UINavigationController (AutoRotate)
 
 - (NSUInteger)supportedInterfaceOrientations{
@@ -64,3 +64,4 @@
 }
 
 @end
+#endif

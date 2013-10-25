@@ -13,12 +13,17 @@
 #import "STWConfigController.h"
 #import "STWTwitterManager.h"
 #import "STWDetailController.h"
+#import "AMBlurView.h"
 
 #define DEGREES_TO_RADIANS(angle) ((angle) / 180.0 * M_PI)
 #define TEXTLABEL_FONT ([UIFont fontWithName:@"Helvetica-Bold" size:13])
-#define DETAIL_TEXTLABEL_FONT ([UIFont fontWithName:@"Helvetica" size:10])
+#define DETAIL_TEXTLABEL_FONT ([UIFont fontWithName:@"Helvetica" size:11])
 #define VIEW_SCALE (0.98f)
 #define ANIMATION_SPEED (0.2f)
+#define TIMELINECONTROLLER_MOTION_EFFECT_LAYER_LEVEL (1)
+
+//#define SOUND_ON
+#define ENABLE_PARSPECTIVE
 
 @interface STWTimelineController ()
 {
@@ -36,10 +41,6 @@
 @property (weak, nonatomic) IBOutlet UILabel* userScreenNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel* userDescriptionLabel;
 @property (weak, nonatomic) IBOutlet UITextView* userUrlTextView;
-
-
-// Action
-- (IBAction)pressComposeButtonAction:(id)sender;
 
 @end
 
@@ -76,6 +77,13 @@
     // Set modal presentation style current context
     self.navigationController.modalPresentationStyle = UIModalPresentationCurrentContext;
     
+    // Configure to search bar display in navigation bar
+    self.searchDisplayController.displaysSearchBarInNavigationBar = YES;
+    
+    // Create bar button item
+    self.searchDisplayController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(pressComposeButtonAction:)];
+    
+    
     // Get user name
     NSString*   userName;
     userName = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
@@ -86,8 +94,10 @@
     // Configure views appearance
     [self _configureViews];
     
+#ifdef SOUND_ON
     // Play audio
     [self _playAudio];
+#endif
     
     // Register notification
     NSNotificationCenter*   center;
@@ -101,13 +111,6 @@
 {
     // Invoke super
     [super prepareForSegue:segue sender:sender];
-    
-    if ([[segue identifier] isEqualToString:@"showConfig"]) {
-        STWConfigController* controller;
-        controller = [segue destinationViewController];
-        controller.view.backgroundColor = [UIColor clearColor];
-        controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    }
 }
 
 //--------------------------------------------------------------//
@@ -141,7 +144,7 @@
     
     //
     // Table view layer
-#if 1
+#ifdef ENABLE_PARSPECTIVE
     CATransform3D   transform;
     transform = CATransform3DIdentity;
     transform.m34 = 1.0/ -100;
@@ -151,34 +154,58 @@
 #endif
     
     //
-    // Scroller
-    self.scroller.contentSize = CGSizeMake(320, 2400);
-    
-    //
     // Profile image view
     self.profileImageView.clipsToBounds = YES;
     self.profileImageView.layer.cornerRadius = 8.0f;
     self.profileImageView.layer.borderWidth = 2.0f;
     self.profileImageView.layer.borderColor = [UIColor whiteColor].CGColor;
     
-    //
-    // StormTrooper image view
-    UIImageView*    stormTrooper;
-    UIImage*        image;
-    CGRect          rect;
-    image = [UIImage imageNamed:@"stormTrooper.png"];
-    stormTrooper = [[UIImageView alloc] initWithImage:image];
-    
-    rect = CGRectZero;
-    rect.size = image.size;
-    rect.origin = CGPointMake(320, 0);
-    stormTrooper.frame = rect;
-    [self.view addSubview:stormTrooper];
+    // Add motion effects
+    [self _addMotionEffects];
 }
 
 //--------------------------------------------------------------//
 #pragma mark -- Private --
 //--------------------------------------------------------------//
+
+- (void)_addMotionEffects
+{
+    //
+    // Create motion effects
+    UIInterpolatingMotionEffect*    xAxis;
+    UIInterpolatingMotionEffect*    yAxis;
+    UIMotionEffectGroup*    group;
+    xAxis = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.x" type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
+    xAxis.minimumRelativeValue = [NSNumber numberWithFloat:-10.0 * TIMELINECONTROLLER_MOTION_EFFECT_LAYER_LEVEL];
+    xAxis.maximumRelativeValue = [NSNumber numberWithFloat:10.0 * TIMELINECONTROLLER_MOTION_EFFECT_LAYER_LEVEL];
+    
+    yAxis = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.y" type:UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis];
+    yAxis.minimumRelativeValue = [NSNumber numberWithFloat:-10.0 * TIMELINECONTROLLER_MOTION_EFFECT_LAYER_LEVEL];
+    yAxis.maximumRelativeValue = [NSNumber numberWithFloat:10.0 * TIMELINECONTROLLER_MOTION_EFFECT_LAYER_LEVEL];
+    
+    group = [[UIMotionEffectGroup alloc] init];
+    group.motionEffects = @[xAxis, yAxis];
+    
+    // Add motion
+    [self.profileImageView addMotionEffect:group];
+    [self.userNameLabel addMotionEffect:group];
+    [self.userScreenNameLabel addMotionEffect:group];
+    [self.userDescriptionLabel addMotionEffect:group];
+    [self.userUrlTextView addMotionEffect:group];
+}
+
+- (void)_reloadData
+{
+    // Reload table view
+    [self.tableView reloadData];
+    
+    // Update scroll view content size
+    CGSize  size;
+    size = self.tableView.contentSize;
+    size.height += 550;
+    self.scroller.contentSize = size;
+    
+}
 
 - (void)_updateProfile
 {
@@ -307,11 +334,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Get status
-    NSArray*    statuses;
-    statuses = [STWTwitterManager sharedManager].statuses;
-    
-    return statuses.count;
+    return [[STWTwitterManager sharedManager].statuses count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -501,17 +524,27 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    if (!_tableHeaderView) {
-        // Create table header view
-        _tableHeaderView = [[UIView alloc] initWithFrame:CGRectZero];
-        _tableHeaderView.backgroundColor = [UIColor clearColor];
+    if (tableView == self.tableView) {
+        if (!_tableHeaderView) {
+            // Create table header view
+            _tableHeaderView = [[UIView alloc] initWithFrame:CGRectZero];
+            _tableHeaderView.backgroundColor = [UIColor clearColor];
+        }
+        return _tableHeaderView;
     }
-    return _tableHeaderView;
+    else {
+        return nil;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 250.0f;
+    if (tableView == self.tableView) {
+        return 250.0f;
+    }
+    else {
+        return 0.0f;
+    }
 }
 
 //--------------------------------------------------------------//
@@ -655,6 +688,22 @@ static NSIndexPath* willSelectIndexPath = nil;
     }
 }
 
+- (IBAction)pressSettingButtonAction:(id)sender {
+    UIStoryboard*           storyboard;
+    UINavigationController* navController;
+    storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    navController = [storyboard instantiateViewControllerWithIdentifier:@"configNavController"];
+
+    STWConfigController* controller;
+//    controller = (STWConfigController*)navController.topViewController;
+//    controller = [storyboard instantiateViewControllerWithIdentifier:@"configController"];
+//    controller.view.backgroundColor = [UIColor clearColor];
+//    navController.modalPresentationStyle = UIModalPresentationCurrentContext;
+//    navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    
+    [self presentViewController:navController animated:YES completion:nil];
+}
+
 //--------------------------------------------------------------//
 #pragma mark -- STWTwitterManagerDidUpdateProfileNotification --
 //--------------------------------------------------------------//
@@ -681,8 +730,7 @@ static NSIndexPath* willSelectIndexPath = nil;
 
 - (void)twitterManagerDidUpdateProfileStatuses:(NSNotification*)notification
 {
-    // Reload table view
-    [self.tableView reloadData];
+    [self _reloadData];
 }
 
 //--------------------------------------------------------------//
@@ -705,6 +753,20 @@ static NSIndexPath* willSelectIndexPath = nil;
     
     // Do animation
     [UIView animateWithDuration:ANIMATION_SPEED delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:animation completion:completion];
+}
+
+//--------------------------------------------------------------//
+#pragma mark -- UISearchDisplayDelegate --
+//--------------------------------------------------------------//
+
+- (void)searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller
+{
+}
+
+- (void)searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView *)tableView
+{
+    tableView.contentInset = UIEdgeInsetsZero;
+    tableView.scrollIndicatorInsets = UIEdgeInsetsZero;
 }
 
 @end

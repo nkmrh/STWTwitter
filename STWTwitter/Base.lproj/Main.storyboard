@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="UrP-pi-KS1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="XdD-d4-dlz">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
     </dependencies>
     <scenes>
         <!--Timeline Controller-->
         <scene sceneID="HVS-Jf-Lym">
             <objects>
-                <viewController id="qTQ-Se-Bko" customClass="STWTimelineController" sceneMemberID="viewController">
+                <viewController definesPresentationContext="YES" id="qTQ-Se-Bko" customClass="STWTimelineController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Bdo-Es-pda">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -22,8 +22,8 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <outlet property="dataSource" destination="qTQ-Se-Bko" id="RKw-QU-CfH"/>
-                                    <outlet property="delegate" destination="qTQ-Se-Bko" id="VVP-KK-QtI"/>
+                                    <outlet property="dataSource" destination="qTQ-Se-Bko" id="znZ-i7-dRe"/>
+                                    <outlet property="delegate" destination="qTQ-Se-Bko" id="fug-es-2SM"/>
                                 </connections>
                             </tableView>
                             <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" indicatorStyle="white" delaysContentTouches="NO" id="QRX-wS-jo8" customClass="STWScroller">
@@ -75,24 +75,15 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <navigationItem key="navigationItem" id="6fi-pa-msZ">
-                        <barButtonItem key="leftBarButtonItem" systemItem="bookmarks" id="EpJ-7Y-pCG">
-                            <connections>
-                                <action selector="pressSettingButtonAction:" destination="qTQ-Se-Bko" id="SYX-KR-Odf"/>
-                                <segue destination="lry-x7-lc0" kind="modal" identifier="showConfig" modalTransitionStyle="coverVertical" id="fSG-YR-Y9f"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="09C-Fr-ERp">
-                            <connections>
-                                <action selector="pressComposeButtonAction:" destination="qTQ-Se-Bko" id="4Ax-sC-GYx"/>
-                            </connections>
-                        </barButtonItem>
+                        <nil key="title"/>
                     </navigationItem>
                     <connections>
                         <outlet property="profileBackgroundImageView" destination="xgN-e1-46x" id="LRZ-nz-sru"/>
                         <outlet property="profileImageView" destination="Bo6-9c-pME" id="Wlk-Od-z2O"/>
                         <outlet property="scroller" destination="QRX-wS-jo8" id="5cY-tR-5jd"/>
+                        <outlet property="searchDisplayController" destination="6bD-xO-s4m" id="bc1-hc-IIt"/>
                         <outlet property="spaceView" destination="lUv-L6-dIU" id="cdL-ao-d9c"/>
                         <outlet property="tableView" destination="QbK-U0-sDO" id="buW-bE-9Kv"/>
                         <outlet property="userDescriptionLabel" destination="OPD-N5-m0T" id="ZaG-vO-VgL"/>
@@ -102,8 +93,25 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xiY-aP-ild" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchBar contentMode="redraw" searchBarStyle="minimal" id="Vaz-ZH-5bg">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="qTQ-Se-Bko" id="dP7-U4-a7y"/>
+                    </connections>
+                </searchBar>
+                <searchDisplayController id="6bD-xO-s4m">
+                    <connections>
+                        <outlet property="delegate" destination="qTQ-Se-Bko" id="Sj1-Qi-hjD"/>
+                        <outlet property="searchBar" destination="Vaz-ZH-5bg" id="gJG-XZ-QT7"/>
+                        <outlet property="searchContentsController" destination="qTQ-Se-Bko" id="bLZ-BM-lJM"/>
+                        <outlet property="searchResultsDataSource" destination="qTQ-Se-Bko" id="4um-vj-qu7"/>
+                        <outlet property="searchResultsDelegate" destination="qTQ-Se-Bko" id="8Lv-Wa-JPg"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="980" y="182"/>
+            <point key="canvasLocation" x="1506" y="182"/>
         </scene>
         <!--Detail Controller-->
         <scene sceneID="9B5-NG-feI">
@@ -136,7 +144,7 @@
                                 </subviews>
                             </view>
                             <view opaque="NO" contentMode="scaleToFill" id="h2i-hm-jhs">
-                                <rect key="frame" x="0.0" y="0.0" width="320.00000000000006" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" none="YES" notEnabled="YES"/>
@@ -164,97 +172,25 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1496" y="182"/>
-        </scene>
-        <!--Config Controller-->
-        <scene sceneID="eP2-SG-IuD">
-            <objects>
-                <viewController id="W89-rn-UFp" customClass="STWConfigController" sceneMemberID="viewController">
-                    <view key="view" opaque="NO" contentMode="scaleToFill" id="mZ6-D1-Aqn">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" id="tEf-1a-29c">
-                                <rect key="frame" x="20" y="232" width="280" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ScM-Mm-x28">
-                                <rect key="frame" x="-74" y="168" width="469" height="56"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <string key="text">Please enter the name of the timeline
-that you want to display</string>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.70000000000000007" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="uIO-Vv-PiQ">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="X8n-CH-12I">
-                            <connections>
-                                <action selector="cancelButtonAction:" destination="W89-rn-UFp" id="t9E-JZ-suZ"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="LkA-ro-Pb0">
-                            <connections>
-                                <action selector="doneButtonAction:" destination="W89-rn-UFp" id="0Z9-uM-xNR"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="userNameTextField" destination="tEf-1a-29c" id="fhI-6n-fpW"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Mhl-FM-2e8" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1506" y="900"/>
+            <point key="canvasLocation" x="2022" y="182"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="Ubf-sL-gdO">
+        <scene sceneID="Wi2-c0-5nP">
             <objects>
-                <navigationController id="UrP-pi-KS1" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" definesPresentationContext="YES" id="XdD-d4-dlz" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-                    <nil key="simulatedBottomBarMetrics"/>
-                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="lB7-ci-eTu">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" id="iLJ-dI-q6S">
-                        <rect key="frame" x="0.0" y="524" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </toolbar>
-                    <connections>
-                        <segue destination="qTQ-Se-Bko" kind="relationship" relationship="rootViewController" id="Guq-IR-wib"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="CYM-5k-ZP9" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="540" y="182"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="7aC-66-1U1">
-            <objects>
-                <navigationController id="lry-x7-lc0" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="PMa-a2-xgZ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="fpw-wx-P4h">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="W89-rn-UFp" kind="relationship" relationship="rootViewController" id="vmw-Jn-CDD"/>
+                        <segue destination="qTQ-Se-Bko" kind="relationship" relationship="rootViewController" id="VKT-Zz-DW2"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="teE-FE-yYT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c0A-oa-y4B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="980" y="900"/>
+            <point key="canvasLocation" x="980" y="182"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
