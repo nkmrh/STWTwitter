@@ -11,20 +11,27 @@
 extern NSString* const STWTwitterManagerDidUpdateProfileNotification;
 extern NSString* const STWTwitterManagerDidUpdateProfileBannerNotification;
 extern NSString* const STWTwitterManagerDidUpdateStatusesNotification;
+extern NSString* const STWTwitterManagerDidFilterdUsersNotification;
 
 @interface STWTwitterManager : NSObject
 
 // Property
+@property (nonatomic) NSString* userName;
 @property (nonatomic, readonly) NSDictionary* profileDict;
 @property (nonatomic, readonly) NSDictionary* profileBannerDict;
 @property (nonatomic, readonly) NSArray* statuses;
+@property (nonatomic, readonly) NSArray* filterdUsers;
 
 // Initialize
 + (STWTwitterManager*)sharedManager;
 
-// Request
-- (void)requestWithScreenName:(NSString*)screenName;
+// Twitter API access
+- (void)updateProfileDict;
+- (void)updateProfileBannerDict;
+- (void)updateUserTimelineStatuses;
+- (void)updateFilterdUsersForSearchName:(NSString*)name;
 
 - (NSDictionary*)statusWithIndexPathRow:(NSInteger)row;
+- (NSDictionary*)filterdUserStatusWithIndexPathRow:(NSInteger)row;
 
 @end

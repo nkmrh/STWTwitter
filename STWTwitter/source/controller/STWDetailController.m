@@ -16,9 +16,6 @@
 {
 }
 
-@property (weak, nonatomic) IBOutlet UIView* containerView;
-
-
 @end
 
 @implementation STWDetailController
@@ -60,6 +57,8 @@
     
     // Add motion
     [self.containerView addMotionEffect:group];
+    [self.textView addMotionEffect:group];
+    [self.profileImageView addMotionEffect:group];
 }
 
 - (void)viewDidDisappear:(BOOL)animated

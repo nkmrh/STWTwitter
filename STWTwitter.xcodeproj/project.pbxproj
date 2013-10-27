@@ -14,7 +14,8 @@
 		6327A66A1813F9C300FF66E7 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 6327A6661813F9C300FF66E7 /* spark.png */; };
 		6327A66B1813F9C300FF66E7 /* star_wars_theme.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6327A6671813F9C300FF66E7 /* star_wars_theme.mp3 */; };
 		6327A66C1813F9C300FF66E7 /* stormTrooper@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6327A6681813F9C300FF66E7 /* stormTrooper@2x.png */; };
-		634033D1181A5F2F002B2F17 /* AMBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 634033D0181A5F2F002B2F17 /* AMBlurView.m */; };
+		634033D6181A7181002B2F17 /* AMBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 634033D5181A7181002B2F17 /* AMBlurView.m */; };
+		638A9735181CE480003ED6EB /* spaceWarpParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 638A9734181CE480003ED6EB /* spaceWarpParticle.sks */; };
 		63B8C2BA1814051200D2F96F /* STWScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B8C2B91814051200D2F96F /* STWScroller.m */; };
 		63B8C2BD18144B9F00D2F96F /* STWDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B8C2BC18144B9F00D2F96F /* STWDetailController.m */; };
 		63CB607B1813F92F00C7523D /* STWAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CB60761813F92F00C7523D /* STWAppController.m */; };
@@ -52,8 +53,9 @@
 		6327A6661813F9C300FF66E7 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spark.png; path = resources/spark.png; sourceTree = "<group>"; };
 		6327A6671813F9C300FF66E7 /* star_wars_theme.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = star_wars_theme.mp3; path = resources/star_wars_theme.mp3; sourceTree = "<group>"; };
 		6327A6681813F9C300FF66E7 /* stormTrooper@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "stormTrooper@2x.png"; path = "resources/stormTrooper@2x.png"; sourceTree = "<group>"; };
-		634033CF181A5F2F002B2F17 /* AMBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBlurView.h; sourceTree = "<group>"; };
-		634033D0181A5F2F002B2F17 /* AMBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBlurView.m; sourceTree = "<group>"; };
+		634033D4181A7181002B2F17 /* AMBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMBlurView.h; path = source/view/AMBlurView.h; sourceTree = "<group>"; };
+		634033D5181A7181002B2F17 /* AMBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMBlurView.m; path = source/view/AMBlurView.m; sourceTree = "<group>"; };
+		638A9734181CE480003ED6EB /* spaceWarpParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = spaceWarpParticle.sks; path = resources/spaceWarpParticle.sks; sourceTree = "<group>"; };
 		63B8C2B81814051200D2F96F /* STWScroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STWScroller.h; path = source/view/STWScroller.h; sourceTree = "<group>"; };
 		63B8C2B91814051200D2F96F /* STWScroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STWScroller.m; path = source/view/STWScroller.m; sourceTree = "<group>"; };
 		63B8C2BB18144B9F00D2F96F /* STWDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STWDetailController.h; path = source/controller/STWDetailController.h; sourceTree = "<group>"; };
@@ -116,8 +118,8 @@
 			children = (
 				63B8C2B81814051200D2F96F /* STWScroller.h */,
 				63B8C2B91814051200D2F96F /* STWScroller.m */,
-				634033CF181A5F2F002B2F17 /* AMBlurView.h */,
-				634033D0181A5F2F002B2F17 /* AMBlurView.m */,
+				634033D4181A7181002B2F17 /* AMBlurView.h */,
+				634033D5181A7181002B2F17 /* AMBlurView.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -150,6 +152,7 @@
 				63E9C07718115C7D000A0D4E /* Images.xcassets */,
 				63E9C07118115C7D000A0D4E /* Main.storyboard */,
 				6327A6651813F9C300FF66E7 /* spaceParticle.sks */,
+				638A9734181CE480003ED6EB /* spaceWarpParticle.sks */,
 				6327A6661813F9C300FF66E7 /* spark.png */,
 				6327A6671813F9C300FF66E7 /* star_wars_theme.mp3 */,
 				6327A6681813F9C300FF66E7 /* stormTrooper@2x.png */,
@@ -324,6 +327,7 @@
 				6327A66C1813F9C300FF66E7 /* stormTrooper@2x.png in Resources */,
 				6315C38F181383DC003ED15E /* Main.storyboard in Resources */,
 				63E9C07818115C7D000A0D4E /* Images.xcassets in Resources */,
+				638A9735181CE480003ED6EB /* spaceWarpParticle.sks in Resources */,
 				63E9C06A18115C7D000A0D4E /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -343,11 +347,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				634033D1181A5F2F002B2F17 /* AMBlurView.m in Sources */,
 				63CB60801813F95900C7523D /* STWTwitterManager.m in Sources */,
 				63CB607B1813F92F00C7523D /* STWAppController.m in Sources */,
 				63B8C2BD18144B9F00D2F96F /* STWDetailController.m in Sources */,
 				63E9C06C18115C7D000A0D4E /* main.m in Sources */,
+				634033D6181A7181002B2F17 /* AMBlurView.m in Sources */,
 				63B8C2BA1814051200D2F96F /* STWScroller.m in Sources */,
 				63CB607D1813F92F00C7523D /* STWTimelineController.m in Sources */,
 			);

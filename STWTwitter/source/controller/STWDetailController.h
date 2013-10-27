@@ -14,6 +14,7 @@
 @property (weak, nonatomic) id delegate;
 
 // Outlets
+@property (weak, nonatomic) IBOutlet UIView* containerView;
 @property (weak, nonatomic) IBOutlet UIImageView* profileImageView;
 @property (weak, nonatomic) IBOutlet UITextView* textView;
 @property (weak, nonatomic) IBOutlet UIImageView* imageView;
