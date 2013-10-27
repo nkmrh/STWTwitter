@@ -9,6 +9,7 @@
 #import "STWTwitterManager.h"
 #import <Accounts/Accounts.h>
 #import <Social/Social.h>
+#import "STWAppController.h"
 
 NSString* const STWTwitterManagerDidUpdateProfileNotification = @"STWTwitterManagerDidUpdateProfileNotification";
 NSString* const STWTwitterManagerDidUpdateProfileBannerNotification = @"STWTwitterManagerDidUpdateProfileBannerNotification";
@@ -80,6 +81,10 @@ static STWTwitterManager*  _sharedInstance = nil;
     [_statuses removeAllObjects];
     _statuses = nil;
     
+    // Save to user default
+    NSUserDefaults* defaults;
+    defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:name forKey:STWUserNameDefaultKey];
     
     // Update
     [self updateProfileDict];

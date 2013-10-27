@@ -11,11 +11,13 @@
 
 @implementation STWAppController
 
+NSString* const STWUserNameDefaultKey = @"username";
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Register default user name
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    NSDictionary *dict = @{@"username" : @"starwars"};
+    NSDictionary *dict = @{STWUserNameDefaultKey : @"starwars"};
     [defaults registerDefaults:dict];
     
     return YES;

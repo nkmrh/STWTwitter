@@ -10,6 +10,8 @@
 
 @interface STWAppController : UIResponder <UIApplicationDelegate>
 
+extern NSString* const STWUserNameDefaultKey;
+
 @property (strong, nonatomic) UIWindow *window;
 
 @end
