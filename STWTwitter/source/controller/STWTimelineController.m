@@ -34,6 +34,10 @@
     UIActivityIndicatorView*    _indicatorView;
     UIView*                     _searchResultFooterView;
     UIActivityIndicatorView*    _searchResultIndicatorView;
+    
+    BOOL                        _isSearching;
+    NSString*                   _searchString;
+    NSString*                   _lastInputString;
 }
 
 // Property
@@ -901,6 +905,25 @@ static NSIndexPath* willSelectIndexPath = nil;
         // Stop animate
         [_searchResultIndicatorView stopAnimating];
     }
+    
+    // Clear flag
+    _isSearching = NO;
+    
+    if (![_lastInputString isEqualToString:_searchString]) {
+        // Search again
+        
+        // Rise flag
+        _isSearching = YES;
+        
+        // Update filtered content
+        [[STWTwitterManager sharedManager] updateFilterdUsersForSearchName:_lastInputString];
+        
+        // Scroll to top
+        [self.searchDisplayController.searchResultsTableView setContentOffset:CGPointZero];
+        
+        // Update last search string
+        _lastInputString = _searchString;
+    }
 }
 
 //--------------------------------------------------------------//
@@ -931,11 +954,22 @@ static NSIndexPath* willSelectIndexPath = nil;
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
 {
-    // Update filtered content
-    [[STWTwitterManager sharedManager] updateFilterdUsersForSearchName:searchString];
+    if (!_isSearching) {
+        // Rise flag
+        _isSearching = YES;
+        
+        // Update filtered content
+        [[STWTwitterManager sharedManager] updateFilterdUsersForSearchName:searchString];
+        
+        // Scroll to top
+        [controller.searchResultsTableView setContentOffset:CGPointZero];
+        
+        // Keep string
+        _searchString = searchString;
+    }
     
-    // Scroll to top
-    [controller.searchResultsTableView setContentOffset:CGPointZero];
+    // Keep string
+    _lastInputString = searchString;
     
     // Return YES to cause the search result table view to be reloaded.
     return NO;

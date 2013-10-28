@@ -25,8 +25,6 @@ NSString* const STWTwitterManagerDidFilterdUsersNotification = @"STWTwitterManag
     NSString*           _userName;
     NSMutableArray*     _filterdUsers;
     NSString*           _prevFilterdName;
-    
-    BOOL                _isUpdatingFilterdUsers;
 }
 
 @end
@@ -292,7 +290,7 @@ static STWTwitterManager*  _sharedInstance = nil;
     }];
 }
 
-- (void)_updateFilterdUsersForSearchName:(NSString*)name withAccount:(ACAccount*)account;
+- (void)_updateFilterdUsersForSearchName:(NSString*)name withAccount:(ACAccount*)account page:(int)page count:(int)count;
 {
     //
     // For to get filterd users
@@ -302,16 +300,6 @@ static STWTwitterManager*  _sharedInstance = nil;
     NSURL*          url;
     SLRequest*      request;
     NSString*       encodedString;
-    int             page;
-    int             count = 15;
-    
-    if (![name isEqualToString:_prevFilterdName]) {
-        // Clear objects
-        [_filterdUsers removeAllObjects];
-    }
-    
-    // Culc page
-    page = ([_filterdUsers count] / count) + 1;
     
     encodedString = [name stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     urlString = [NSString stringWithFormat:@"https://api.twitter.com/1.1/users/search.json?q=%@&count=%d&page=%d", encodedString, count, page];
@@ -357,9 +345,6 @@ static STWTwitterManager*  _sharedInstance = nil;
         dispatch_async(dispatch_get_main_queue(), ^{
             // Hide network activity indicator
             app.networkActivityIndicatorVisible = NO;
-            
-            // Clear flag
-            _isUpdatingFilterdUsers = NO;
             
             // Keep filterd name
             _prevFilterdName = name;
@@ -469,21 +454,23 @@ static STWTwitterManager*  _sharedInstance = nil;
 
 - (void)updateFilterdUsersForSearchName:(NSString*)name
 {
-    // Check flag
-    if (_isUpdatingFilterdUsers) {
-        // Ignore
-        return;
-    }
-    
-    // Rise flag
-    _isUpdatingFilterdUsers = YES;
-    
     //
     // Check twitter account
     ACAccountStore* accountStore;
     ACAccountType*  twitterAccountType;
     accountStore = [[ACAccountStore alloc] init];
     twitterAccountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+    
+    if (![name isEqualToString:_prevFilterdName]) {
+        // Clear objects
+        [_filterdUsers removeAllObjects];
+    }
+    
+    // Culc page
+    int page;
+    int count = 15;
+    page = ([_filterdUsers count] / count) + 1;
+    
     [accountStore requestAccessToAccountsWithType:twitterAccountType options:nil completion:^(BOOL granted, NSError *error) {
         if (granted) {
             // Get twitter accounts
@@ -496,7 +483,7 @@ static STWTwitterManager*  _sharedInstance = nil;
                 account = [twitterAccounts objectAtIndex:0];
                 
                 // Update filterd users
-                [self _updateFilterdUsersForSearchName:name withAccount:account];
+                [self _updateFilterdUsersForSearchName:name withAccount:account page:page count:count];
             }
         }
         else {
