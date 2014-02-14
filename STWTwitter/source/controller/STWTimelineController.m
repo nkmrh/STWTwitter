@@ -952,11 +952,19 @@ static NSIndexPath* willSelectIndexPath = nil;
 #pragma mark -- UISearchDisplayControllerDelegate --
 //--------------------------------------------------------------//
 
+- (void)_wait
+{
+    // Do nothing
+}
+
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
 {
     if (!_isSearching) {
         // Rise flag
         _isSearching = YES;
+        
+        // For high spec machine
+        [self performSelector:@selector(_wait) withObject:nil afterDelay:0.2f];
         
         // Update filtered content
         [[STWTwitterManager sharedManager] updateFilterdUsersForSearchName:searchString];
